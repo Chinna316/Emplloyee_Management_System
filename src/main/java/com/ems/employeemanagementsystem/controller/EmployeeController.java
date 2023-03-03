@@ -11,7 +11,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    @Autowired
+
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
@@ -38,6 +38,19 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/update")
+    public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
+        Employee employee = null;
+        employee = employeeService.getEmployee(id);
+        return ResponseEntity.ok(employee);
+    }
+
+
+    @PutMapping
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable Long id) {
+        employee = employeeService.updateEmployee(employee, id);
+        return ResponseEntity.ok(employee);
+    }
 }
 
 
